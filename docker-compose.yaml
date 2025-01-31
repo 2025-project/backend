@@ -1,12 +1,18 @@
+version: '3.8'
+
 services:
   postgres:
     image: postgres:latest
+    container_name: postgres_stockdb
     restart: always
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: stockdb
+      POSTGRES_USER: postgres # 기본 사용자를 postgres로 변경 (root도 가능)
+      POSTGRES_PASSWORD: 1234 # 비밀번호 설정
+      POSTGRES_DB: stockdb # 사용할 DB 이름
+
+volumes:
+  postgres_data: # Docker가 자동으로 볼륨을 관리하도록 설정
