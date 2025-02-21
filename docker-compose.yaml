@@ -10,9 +10,30 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: postgres # 기본 사용자를 postgres로 변경 (root도 가능)
-      POSTGRES_PASSWORD: 1234 # 비밀번호 설정
-      POSTGRES_DB: stockdb # 사용할 DB 이름
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: stockdb
+
+  nestjs:
+    build: .
+    container_name: nestjs_app
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=1234
+      - DATABASE_NAME=stockdb
+    networks:
+      - default
 
 volumes:
-  postgres_data: # Docker가 자동으로 볼륨을 관리하도록 설정
+  postgres_data:
+
+networks:
+  default:
+    driver: bridge
