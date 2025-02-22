@@ -3,9 +3,9 @@ import { PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 export class User {
-  @Field(() => String)
-  @PrimaryGeneratedColumn('increment')
-  id: string;
+  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Field()
   name: string;

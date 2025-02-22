@@ -6,7 +6,10 @@ export class UsersService {
   private users = [];
 
   create(createUserInput: CreateUserInput) {
-    const user = { id: Date.now(), ...createUserInput };
+    const user = {
+      id: this.users.length + 1,
+      ...createUserInput,
+    };
     this.users.push(user);
     return user;
   }
