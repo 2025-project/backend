@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { User } from './users/entities/user/user';
+import { AppService } from './app.service';
+import { User } from './user/user.entity';
+import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -25,7 +25,7 @@ import { AuthModule } from './auth/auth.module';
       driver: ApolloDriver,
       autoSchemaFile: true, // 자동으로 schema 생성
     }),
-    UsersModule,
+    UserModule,
     AuthModule,
   ],
   controllers: [AppController],
